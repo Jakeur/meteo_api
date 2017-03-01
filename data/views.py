@@ -1,14 +1,50 @@
 from rest_framework import generics
-from data.models import Data
-from data.serializers import DataSerializer
+from data.models import Sensor, Station
+from data.serializers import SensorSerializer, StationSerializer
 
-class DataList(generics.ListCreateAPIView):
+class SensorList(generics.ListCreateAPIView):
+    """    
+    GET request
+
+    **Context**
     
-    queryset = Data.objects.all()
-    serializer_class = DataSerializer
+    Webservice to list all :model:`data.Sensor` from all :model:`data.Station`.
+   
+    **URL**
+
+    server_url/sensor/
+    """
+    
+    queryset = Sensor.objects.all()
+    serializer_class = SensorSerializer
 
         
-class DataDetail(generics.RetrieveUpdateDestroyAPIView):
+class SensorDetail(generics.RetrieveUpdateDestroyAPIView):
+    """    
+    GET / POST / DELETE requests
 
-    queryset = Data.objects.all()
-    serializer_class = DataSerializer
+    **Context**
+    
+    Webservices to interact with a specific :model:`data.Sensor`.
+   
+    **URL**
+
+    GET / DELETE -> server_url/sensor/{id}/
+
+    POST -> server_url/sensor/ with form :model:`data.Sensor` filled.
+    """
+
+    queryset = Sensor.objects.all()
+    serializer_class = SensorSerializer
+
+    
+class StationList(generics.ListCreateAPIView):
+    
+    queryset = Station.objects.all()
+    serializer_class = StationSerializer
+
+        
+class StationDetail(generics.RetrieveUpdateDestroyAPIView):
+
+    queryset = Station.objects.all()
+    serializer_class = StationSerializer
