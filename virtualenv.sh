@@ -14,7 +14,7 @@ source env/bin/activate
 pip install django
 pip install djangorestframework
 pip install pygments
-pip install admindocs
+pip install docutils
 pip install middleware
 
-python manage.py runserver
+python manage.py runserver 0.0.0.0:8000
