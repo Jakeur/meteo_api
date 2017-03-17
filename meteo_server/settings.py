@@ -26,8 +26,7 @@ SECRET_KEY = 'l^@3(2+s+0qnmsl7n611!c9y!!^kb#gcr5_pt#+)=zwej2n0xf'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '10.15.192.18',
-    '127.0.0.1',
+    'tech-toulouse.ovh',
 ]
 
 
