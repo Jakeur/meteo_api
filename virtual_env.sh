@@ -5,10 +5,10 @@
 ## Login   <spare@epitech.net>
 ## 
 ## Started on  Wed Mar  1 15:42:32 2017 root
-## Last update Thu Mar  2 14:36:22 2017 root
+## Last update Wed Apr  5 14:39:40 2017 root
 ##
 
-virtualenv env
+virtualenv env				# Launch virtualenv
 source env/bin/activate
 
 pip install django
@@ -17,4 +17,6 @@ pip install pygments
 pip install admindocs
 pip install middleware
 
-python manage.py runserver 0.0.0.0:8000
+easy_install --upgrade pytz		# Python Timezone manager
+
+python manage.py runserver 0.0.0.0:8000	# Run server according to settings.py parameters
