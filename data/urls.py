@@ -10,6 +10,9 @@ urlpatterns = [
     # Get sensors from a specific station
     url(r'^sensor/(?P<station_id>[0-9]+)/$', views.from_station),
 
+    # Get last sensors value from a specific station 
+    url(r'^sensor/(?P<station_id>[0-9]+)/last_values/$', views.last_values_from_station),
+
     # Get a specific sensor from a specific station
     url(r'^sensor/(?P<station_id>[0-9]+)/(?P<sensor_type>[a-z]+)/$', views.from_station_and_type),
 

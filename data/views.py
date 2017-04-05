@@ -2,6 +2,7 @@ from rest_framework import generics
 from data.models import Sensor, Station
 from data.serializers import SensorSerializer, StationSerializer
 from datetime import datetime
+from django.db import connection
 from pytz import timezone
 import pytz
 
@@ -22,6 +23,31 @@ server_url/sensor/{id}/
 @api_view(['GET'])
 def from_station(request, station_id):
     sensors = Sensor.objects.filter(station_id=station_id)
+    serializer_class = SensorSerializer(sensors, many=True)
+    return Response(serializer_class.data)
+
+"""    
+GET request
+
+**Context**
+
+Webservice to list all :model:`data.Sensor` from a specific :model:`data.Station`.
+
+**URL**
+
+server_url/sensor/{id}/last_values
+"""
+@api_view(['GET'])
+def last_values_from_station(request, station_id):
+    cursor = connection.cursor()
+    sensors = []
+    sensor_query = "SELECT sensor FROM (SELECT DISTINCT sensor FROM data_sensor)"
+    cursor.execute(sensor_query)
+    liste = cursor.fetchall()
+    for tmp in liste:
+        tmp_query = "SELECT * FROM data_sensor WHERE sensor=%s AND station_id=%s ORDER BY id DESC LIMIT 1";
+        params = (tmp[0], station_id, )
+        sensors += Sensor.objects.raw(tmp_query, params)
     serializer_class = SensorSerializer(sensors, many=True)
     return Response(serializer_class.data)
 
